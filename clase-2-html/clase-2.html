@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <caption> Mejores Tenistas de la historia</caption>
+        <thead>
+            <tr>
+                <th>Tenista</th>
+                <th> Apodo </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Roger Federer</td>
+                <td> The Swiss Perfection | El maestro </td>
+            </tr>
+            <tr>
+                <td>Rafael Nadal</td>
+                <td> El matador | La Fiera</td>
+            </tr>
+            <tr>
+                <td>Novak Djokovic</td>
+                <td> Terremoto de los Balcanes | Djoker </td>
+            </tr>            
+        </tbody>
+        <br/>
+    <tfoot>
+        <tr>
+            <td colspan="3"> Estos apodos suelen reflejar el estilo de juego, la personalidad o la nacionalidad del deportista</td>
+        </tr>
+    </tfoot>
+
+    </table>
+    <br>
+    <form action="/submit" method="post" autocomplete="on">
+        <fieldset>
+            <legend>Encuesta Tenista favorito</legend>
+            <label for="fullname">Nombre completo:</label>
+            <input type="text" id="fullname" name="fullname" required autocomplete="name" />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password" />
+
+            <label for="country">País:</label>
+            <select id="country" name="country" required/>
+                <option value="mx"> México</option>
+                <option value="us"> Estados Unidos</option>
+            </select>
+        </fieldset>
+    <button type="submit"> Enviar encuesta</button>
+    </form>
+</body>
+</html>
