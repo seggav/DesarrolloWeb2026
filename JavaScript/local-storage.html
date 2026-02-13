@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+
+    <form class="form" onsubmit="guardarDatos(event)">
+          <div class="form-row">
+            <label class="label" for="nombre">Nombre:</label>
+            <input class="input" type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" />
+          </div>
+
+          <div class="form-row">
+            <label class="label" for="correo">Correo:</label>
+            <input class="input" type="email" id="correo" name="correo" placeholder="tu@correo.com" />
+          </div>
+
+          <div class="form-row">
+            <label class="label" for="mensaje">Mensaje:</label>
+            <input class="input" type="text" id="mensaje" name="mensaje" placeholder="Escribe un mensaje corto" />
+          </div>
+
+          <button onclick="guardarDatos()" type="submit">Enviar</button>
+        </form>
+
+    <script>
+
+    function guardarDatos(event){
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const mensaje = document.getElementById("mensaje").value;
+      localStorage.setItem("nombre", nombre);
+      localStorage.setItem("correo", correo);
+      localStorage.setItem("mensaje", mensaje);
+        }
+
+        function MuestraMensaje(){
+            const nombre = localStorage.getItem("nombre");
+            const correo = localStorage.getItem("correo")
+            alert("Hola, " + nombre + " , tu correo es: " + correo )
+        }
+    </script>
+
+    <br><br>
+    <button onclick="MuestraMensaje()">Mostrar Mensaje</button>
+</body>
+</html>
