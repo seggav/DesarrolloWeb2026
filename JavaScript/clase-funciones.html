@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen con mensaje</title>
+</head>
+<body>
+
+    <button onclick="mostrar_imagen()">Mostrar imagen</button>
+    <button onclick="ocultar_imagen()">Ocultar imagen</button>
+
+    <br><br>
+
+    <img id="miImagen" 
+    src="https://static.vecteezy.com/system/resources/thumbnails/022/917/027/small/yellow-happy-smile-face-emoticon-png.png" 
+    alt="Carita feliz jiji" 
+    onmouseover="mostrar_texto()" 
+    onmouseout="ocultar_texto()"
+    >
+    
+
+    <p id="mensaje"></p>
+
+    <script>
+        function mostrar_imagen(){
+            document.getElementById("miImagen").style.display = "block";
+        }
+
+        function ocultar_imagen(){
+            document.getElementById("miImagen").style.display = "none";
+            document.getElementById("mensaje").innerHTML = "";
+        }
+
+        function mostrar_texto(){
+            document.getElementById("mensaje").innerHTML = "Estás viendo la imagen";
+        }
+
+        function ocultar_texto(){
+            document.getElementById("mensaje").innerHTML = "";
+        }
+    </script>
+
+    
+
+</body>
+</html>
