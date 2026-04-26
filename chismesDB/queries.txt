@@ -1,0 +1,145 @@
+Obtén todos los chismes registrados
+SELECT * FROM chismes;
+
+
+Muestra solo los chismes reales
+SELECT * FROM chismes
+WHERE es_real = 1;
+
+Encuentra los chismes inventados
+SELECT * FROM chismes
+WHERE es_real = 0;
+
+
+Chismes con monto de silencio mayor a 500
+SELECT * FROM chismes
+WHERE monto_silencio > 500;
+
+
+Chismes con gravedad mayor o igual a 4
+SELECT * FROM chismes
+WHERE nivel_gravedad >= 4;
+
+
+Chismes sobre una persona específica llamada Ana
+SELECT * FROM chismes
+WHERE sobre_quien = 'Ana';
+
+
+Chismes contados por persona que los dijo
+SELECT quien_dijo, COUNT(*) AS total_chismes
+FROM chismes
+GROUP BY quien_dijo
+ORDER BY total_chismes DESC;
+
+
+Chismes contados por persona involucrada
+SELECT sobre_quien, COUNT(*) AS veces_mencionado
+FROM chismes
+GROUP BY sobre_quien
+ORDER BY veces_mencionado DESC;
+
+
+Chismes ocurridos entre dos fechas
+SELECT * FROM chismes
+WHERE fecha BETWEEN '2024-01-01' AND '2024-03-31';
+
+
+Cuántos chismes se dijeron por año
+SELECT strftime('%Y', fecha) AS anio, COUNT(*) AS total
+FROM chismes
+GROUP BY anio
+ORDER BY anio;
+
+
+Cuántos chismes se dijeron por mes
+SELECT strftime('%m', fecha) AS mes, COUNT(*) AS total
+FROM chismes
+GROUP BY mes
+ORDER BY mes;
+
+
+Chismes agrupados por año y mes
+SELECT strftime('%Y', fecha) AS anio,
+       strftime('%m', fecha) AS mes,
+       COUNT(*) AS total
+FROM chismes
+GROUP BY anio, mes
+ORDER BY anio, mes;
+
+
+Años donde se dijeron más de 10 chismes
+SELECT strftime('%Y', fecha) AS anio, COUNT(*) AS total
+FROM chismes
+GROUP BY anio
+HAVING total > 10;
+
+
+Suma total de dinero pagado por silencio
+SELECT SUM(monto_silencio) AS suma_total
+FROM chismes;
+
+
+Promedio del monto de silencio
+SELECT ROUND(AVG(monto_silencio), 2) AS promedio_silencio
+FROM chismes;
+
+
+Promedio de gravedad por categoría
+SELECT categoria,
+       ROUND(AVG(nivel_gravedad), 2) AS promedio_gravedad
+FROM chismes
+GROUP BY categoria
+ORDER BY promedio_gravedad DESC;
+
+
+Categorías con más de 5 chismes
+SELECT categoria, COUNT(*) AS total
+FROM chismes
+GROUP BY categoria
+HAVING total > 5;
+
+
+Personas que recibieron más de 1000 en pagos de silencio
+SELECT sobre_quien,
+       SUM(monto_silencio) AS total_silencio
+FROM chismes
+GROUP BY sobre_quien
+HAVING total_silencio > 1000;
+
+
+Chismes con testigos distintos de cero
+SELECT * FROM chismes
+WHERE testigos != 0;
+
+
+Chismes de gravedad entre 2 y 4
+SELECT * FROM chismes
+WHERE nivel_gravedad BETWEEN 2 AND 4;
+
+
+Chismes de la categoría trabajo
+SELECT * FROM chismes
+WHERE categoria = 'trabajo';
+
+
+Chismes contados por lugar
+SELECT lugar, COUNT(*) AS total
+FROM chismes
+GROUP BY lugar
+ORDER BY total DESC;
+
+
+Lugares donde se dijeron más de 3 chismes
+SELECT lugar, COUNT(*) AS total
+FROM chismes
+GROUP BY lugar
+HAVING total > 3;
+
+
+Personas que dijeron chismes con promedio de gravedad mayor a 3
+SELECT quien_dijo,
+       ROUND(AVG(nivel_gravedad), 2) AS promedio_gravedad
+FROM chismes
+GROUP BY quien_dijo
+HAVING promedio_gravedad > 3;
