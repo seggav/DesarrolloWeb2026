@@ -1,0 +1,73 @@
+
+-- 1. Total de usuarios por país
+SELECT p.nombre AS pais, COUNT(u.id) AS total_usuarios
+FROM Usuarios u
+JOIN Paises p ON u.pais_id = p.id
+GROUP BY p.nombre;
+
+
+-- 2. Número de actores registrados por película
+SELECT pel.titulo, COUNT(pa.actor_id) AS total_actores
+FROM Peliculas pel
+JOIN PeliculaActor pa ON pel.id = pa.pelicula_id
+GROUP BY pel.titulo;
+
+
+-- 3. Películas con dos o más actores
+SELECT pel.titulo
+FROM Peliculas pel
+JOIN PeliculaActor pa ON pel.id = pa.pelicula_id
+GROUP BY pel.titulo
+HAVING COUNT(pa.actor_id) >= 2;
+
+
+-- 4. Total de usuarios registrados por año
+SELECT STRFTIME('%Y', fecha_registro) AS anio, COUNT(id) AS total_usuarios
+FROM Usuarios
+GROUP BY anio;
+
+
+-- 5. Total de usuarios registrados por país y por año
+SELECT p.nombre AS pais, STRFTIME('%Y', u.fecha_registro) AS anio, COUNT(u.id) AS total_usuarios
+FROM Usuarios u
+JOIN Paises p ON u.pais_id = p.id
+GROUP BY p.nombre, anio;
+
+
+-- 6. Películas por actor
+SELECT a.nombre AS actor, pel.titulo AS pelicula
+FROM Actores a
+JOIN PeliculaActor pa ON a.id = pa.actor_id
+JOIN Peliculas pel ON pa.pelicula_id = pel.id;
+
+
+-- 7. Actores que aparecen en "Los Juegos del Hambre"
+SELECT a.nombre AS actor
+FROM Actores a
+JOIN PeliculaActor pa ON a.id = pa.actor_id
+JOIN Peliculas pel ON pa.pelicula_id = pel.id
+WHERE pel.titulo = 'Los Juegos del Hambre';
+
+
+-- 8. Minutos acumulados por usuario en ver películas
+SELECT u.nombre AS usuario, SUM(r.minutos_vistos) AS minutos_totales
+FROM Usuarios u
+JOIN Reproducciones r ON u.id = r.usuario_id
+GROUP BY u.nombre;
+
+
+-- 9. Películas que no hayan tenido reproducciones
+SELECT pel.titulo
+FROM Peliculas pel
+LEFT JOIN Reproducciones r ON pel.id = r.pelicula_id
+WHERE r.pelicula_id IS NULL;
+
+
+-- 10. RETO: Actores de las películas vistas por usuarios de España
+SELECT DISTINCT a.nombre AS actor
+FROM Actores a
+JOIN PeliculaActor pa ON a.id = pa.actor_id
+JOIN Reproducciones r ON pa.pelicula_id = r.pelicula_id
+JOIN Usuarios u ON r.usuario_id = u.id
+JOIN Paises p ON u.pais_id = p.id
+WHERE p.nombre = 'España';
